@@ -61,14 +61,14 @@ vhat = resid.value
 
 ### 3. Second Stage Regression
 
-# The following functions '_R_compat_quantile' and '_eval_bspline_basis' are copied from patsy.
-def _R_compat_quantile(x, probs):
+# The following functions 'R_compat_quantile' and 'eval_bspline_basis' are copied from patsy.
+def R_compat_quantile(x, probs):
     #return np.percentile(x, 100 * np.asarray(probs))
     probs = np.asarray(probs)
     quantiles = np.asarray([np.percentile(x, 100 * prob) for prob in probs.ravel(order="C")])
     return quantiles.reshape(probs.shape, order="C")
 
-def _eval_bspline_basis(x, df, degree, der, include_intercept):
+def eval_bspline_basis(x, df, degree, der, include_intercept):
     # Note: the order of a spline is the same as its degree + 1.
     # Note: there are (len(knots) - order) basis functions.
     order = degree + 1
@@ -76,7 +76,7 @@ def _eval_bspline_basis(x, df, degree, der, include_intercept):
     if not include_intercept:
         n_inner_knots += 1
     knot_quantiles = np.linspace(0, 1, n_inner_knots + 2)[1:-1]
-    inner_knots = _R_compat_quantile(x, knot_quantiles)
+    inner_knots = R_compat_quantile(x, knot_quantiles)
     knots = np.concatenate(([np.min(x), np.max(x)] * order, inner_knots))
     knots.sort()
     n_bases = len(knots) - (degree + 1)
@@ -99,7 +99,7 @@ if option == 0:
 
 # option 1: B-splines
 if option == 1:
-    vhat_bs_hand = _eval_bspline_basis(x=vhat, df=2*degree-1, degree=degree, der=0, include_intercept=False)
+    vhat_bs_hand = eval_bspline_basis(x=vhat, df=2*degree-1, degree=degree, der=0, include_intercept=False)
     w_hat = np.column_stack([endog_var, exog_var, vhat_bs_hand])
 
 # Create optimization variables and a parameter
@@ -151,7 +151,7 @@ if option == 0:
 if option == 1:
     # der = 1 for derivative
     derivative_lambda = 0
-    all_derivative = _eval_bspline_basis(x=vhat, df=2*degree-1, degree=degree, der=1, include_intercept=False)
+    all_derivative = eval_bspline_basis(x=vhat, df=2*degree-1, degree=degree, der=1, include_intercept=False)
     num_columns = all_derivative.shape[1]
 
     # `beta` has length `dim_endo_exo` + 2*`degree`-1
