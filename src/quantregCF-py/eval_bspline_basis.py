@@ -1,3 +1,7 @@
+import R_compat_quantile
+import numpy as np
+from scipy.interpolate import splev
+
 def eval_bspline_basis(x, df, degree, der, include_intercept):
     # Note: the order of a spline is the same as its degree + 1.
     # Note: there are (len(knots) - order) basis functions.

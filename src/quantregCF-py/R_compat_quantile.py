@@ -1,3 +1,5 @@
+import numpy as np
+
 def R_compat_quantile(x, probs):
     #return np.percentile(x, 100 * np.asarray(probs))
     probs = np.asarray(probs)
