@@ -1,30 +1,38 @@
-import first_reg
-import second_reg
-import asympt_variance
-import kernel
-from urllib.request import urlopen
-import pandas as pd
+from loaddata import loaddata
+from first_reg import first_stage_reg
+from second_reg import second_stage_reg
+from dev_lambda import dev_lambda
+from asympt_variance import asympt_variance
 
-# load the dataset
-url = urlopen("http://people.brandeis.edu/~kgraddy/datasets/fishdata.dta")
-df = pd.read_stata(url)
+### Set variables
+# TODO: The program takes 6 inputs: option, degree, tau_first_stage, tau_second_stage, data_type, data_source
+tau_first_stage = 0.5
+tau_second_stage = 0.5
+option = 1
+degree = 3
+data_type = 0  # default = 0 (url link)
+data_source = "http://people.brandeis.edu/~kgraddy/datasets/fishdata.dta"
 
-# define the dependent variable (Y) and the endogenous right-hand side variable (X)
-dep_var = df["qty"].to_numpy()
-endog_var = df["price"].to_numpy()
+### Load the dataset
+dep_var, endog_var, exog_var, z_var, dim_z = loaddata(data_type, data_source)
 
-# define exogenous included variables
-exog_var_list = ["day1", "day2", "day3", "day4"]
-exog_var = df[exog_var_list].to_numpy()
+### Regressions
+vhat = first_stage_reg(endog_var, z_var, dim_z, tau_first_stage)
+w_hat, beta, second_stage_res = second_stage_reg(dep_var, endog_var, exog_var, tau_second_stage, degree, option, vhat)
+derivative_lambda = dev_lambda(exog_var, beta, option, degree, vhat)
+se = asympt_variance(exog_var, z_var, tau_second_stage, w_hat, vhat, second_stage_res, derivative_lambda)
 
-# define instrumental variables
-iv_var_list = ["stormy", "mixed"]
-iv_var = df[iv_var_list].to_numpy()
+### Test results
+# TODO: separate test files
+betahat = beta.value[0]
 
-# define all exogenous variables
-z_var_list = ["day1", "day2", "day3", "day4", "stormy", "mixed"]
-z_var = df[z_var_list].to_numpy()
+# obtain the 95% confidence interval
+ci_lb = betahat - 1.96 * se[0]
+ci_ub = betahat + 1.96 * se[0]
 
+## Expected results from `original.py`
+# Quantile:  0.5 0.5 Estimate:  -0.3229033782770835  Standard Error:  0.344419675456656
+# 95% Confidence interval:  -0.9979659421721293 0.35215918561796233
 
-
-if __name__ == "__main__":
+print("Quantile: ", tau_first_stage, tau_second_stage, "Estimate: ", betahat, " Standard Error: ", se[0])
+print("95% Confidence interval: ", ci_lb, ci_ub)

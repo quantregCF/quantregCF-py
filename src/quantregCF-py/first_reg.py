@@ -1,8 +1,7 @@
 import cvxpy as cp
 
-def first_stage_reg(endog_var, z_var, z_var_list, tau_first_stage):
+def first_stage_reg(endog_var, z_var, dim_z, tau_first_stage):
     # Create optimization variables and a parameter
-    dim_z = len(z_var_list)
     beta = cp.Variable(dim_z)
     alpha = cp.Variable()
     tau = cp.Parameter()

@@ -1,3 +1,6 @@
+import numpy as np
+from kernel import kl_normal
+
 def asympt_variance(exog_var, z_var, tau_second_stage, w_hat, vhat, second_stage_residual, derivative_lambda):
     # estimate K
     tau = tau_second_stage
@@ -44,9 +47,5 @@ def asympt_variance(exog_var, z_var, tau_second_stage, w_hat, vhat, second_stage
     avar = np.diag(Omega/n)
     se = np.sqrt(avar)
 
-    # obtain the 95% confidence interval
-    ci_lb = betahat - 1.96*se[0]
-    ci_ub = betahat + 1.96*se[0]
+    return se
 
-    print("Quantile: ", tau_first_stage, tau_second_stage, "Estimate: ", betahat, " Standard Error: ", se[0])
-    print("95% Confidence interval: ", ci_lb, ci_ub)

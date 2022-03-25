@@ -1,5 +1,6 @@
+import numpy as np
 import cvxpy as cp
-import eval_bspline_basis
+from eval_bspline_basis import eval_bspline_basis
 
 def second_stage_reg(dep_var, endog_var, exog_var, tau_second_stage, degree, option, vhat):
     # create w_hat and vhat for the second stage regression
@@ -31,7 +32,6 @@ def second_stage_reg(dep_var, endog_var, exog_var, tau_second_stage, degree, opt
     tau.value = tau_second_stage
     prob.solve()
 
-    betahat = beta.value[0]
     second_stage_residual = resid.value
 
-    return w_hat, betahat, second_stage_residual
+    return w_hat, beta, second_stage_residual

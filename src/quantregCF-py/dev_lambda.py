@@ -1,3 +1,5 @@
+from eval_bspline_basis import eval_bspline_basis
+
 def dev_lambda(exog_var, beta, option, degree, vhat):
     # dim_endo_exo = total length of endogenous variable and exogenous variables
     dim_endo_exo = 1 + exog_var.shape[1]
