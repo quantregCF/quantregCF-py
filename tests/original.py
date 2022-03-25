@@ -2,6 +2,7 @@ from urllib.request import urlopen
 import pandas as pd
 import numpy as np
 import cvxpy as cp
+from scipy.interpolate import splev
 
 # take the following inputs: option, degree, tau_first_stage, tau_second_stage
 
