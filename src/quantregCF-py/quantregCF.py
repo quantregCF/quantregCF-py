@@ -5,7 +5,7 @@ from dev_lambda import dev_lambda
 from asympt_variance import asympt_variance
 
 # data = [data_type, data_source, variable_lst]
-def quantregCF(option=1, degree=3, tau_first_stage=0.5 , tau_second_stage=0.5, data=[]):
+def quantregCF(option=1, degree=3, tau_first_stage=0.5, tau_second_stage=0.5, data=[]):
     # load the dataset
     dep_var, endog_var, exog_var, z_var, dim_z = loaddata(data[0], data[1], data[2])
 
