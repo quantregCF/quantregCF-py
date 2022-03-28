@@ -22,3 +22,10 @@ ci_ub = betahat + 1.96 * se[0]
 print("Quantile: 0.5 0.5", "Estimate: ", betahat, " Standard Error: ", se[0])
 print("95% Confidence interval: ", ci_lb, ci_ub)
 
+## 99% confidence interval
+ci_lb = betahat - 2.58 * se[0]
+ci_ub = betahat + 2.58 * se[0]
+
+print("Quantile: 0.5 0.5", "Estimate: ", betahat, " Standard Error: ", se[0])
+print("99% Confidence interval: ", ci_lb, ci_ub)
+
