@@ -12,7 +12,8 @@ def quantregCF(option=1, degree=3, tau_first_stage=0.5, tau_second_stage=0.5, da
     # regressions
     vhat = first_stage_reg(endog_var, z_var, dim_z, tau_first_stage)
     w_hat, beta, second_stage_res = second_stage_reg(dep_var, endog_var, exog_var, tau_second_stage, degree, option, vhat)
+    beta_lst = [beta.value[i] for i in range(beta.shape[0])]
     derivative_lambda = dev_lambda(exog_var, beta, option, degree, vhat)
     se = asympt_variance(exog_var, z_var, tau_second_stage, w_hat, vhat, second_stage_res, derivative_lambda)
 
-    return beta, se
+    return beta_lst, se
