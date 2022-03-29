@@ -9,6 +9,11 @@ This project can be installed using pip:
 pip install -i https://test.pypi.org/simple/ quantregCF
 ```
 
+## How to get start
+- Install the package by following the instruction above (note that the current package is stored in [TestPyPI](https://test.pypi.org/project/quantregCF/))
+- Download the test file `fishdata.py` to your computer
+- Run ```python3 fishdata.py```
+
 ## Usage 
 ```python
 from quantregCF import quantregCF
