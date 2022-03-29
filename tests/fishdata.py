@@ -8,6 +8,8 @@ data_lst = [0, data_source, var_lst]
 # regressions
 beta, se = quantregCF(option=1, degree=3, tau_first_stage=0.5, tau_second_stage=0.5, data=data_lst)
 
+print(beta)
+
 # CI
 betahat = beta[0]
 
