@@ -1,8 +1,8 @@
-from loaddata import loaddata
-from first_reg import first_stage_reg
-from second_reg import second_stage_reg
-from dev_lambda import dev_lambda
-from asympt_variance import asympt_variance
+from .loaddata import loaddata
+from .first_reg import first_stage_reg
+from .second_reg import second_stage_reg
+from .dev_lambda import dev_lambda
+from .asympt_variance import asympt_variance
 
 # data = [data_type, data_source, variable_lst]
 def quantregCF(option=1, degree=3, tau_first_stage=0.5, tau_second_stage=0.5, data=[]):

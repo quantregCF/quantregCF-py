@@ -1,5 +1,5 @@
 import numpy as np
-from kernel import kl_normal
+from .kernel import kl_normal
 
 def asympt_variance(exog_var, z_var, tau_second_stage, w_hat, vhat, second_stage_residual, derivative_lambda):
     # estimate K
