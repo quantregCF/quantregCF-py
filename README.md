@@ -1,16 +1,16 @@
 # QuantregCF
 
-This Python package is an implementation of quantile regression model proposed by Professor Simon Lee in 
+This Python package is an implementation of quantile regression model proposed by Sokbae Lee in 
 "[Endogeneity in Quantile Regression Models: A Control Function Approach](https://doi.org/10.1016/j.jeconom.2007.01.014)", Journal of Econometrics, 141: 1131-1158, 2007.
 
 ## Installation
 This project can be installed using pip: 
 ```bash
-pip install -i https://test.pypi.org/simple/ quantregCF
+pip install -i quantregCF
 ```
 
 ## How to get start
-- Install the package by following the instruction above (note that the current package is stored in [TestPyPI](https://test.pypi.org/project/quantregCF/))
+- Install the package by following the instruction above (note that the current package is stored in [PyPI](https://pypi.org/project/quantregCF/))
 - Download the test file `fishdata.py` to your computer
 - Run ```python3 fishdata.py```
 
