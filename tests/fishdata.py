@@ -15,7 +15,7 @@ betahat = beta[0]
 ci_lb = betahat - 1.96 * se[0]
 ci_ub = betahat + 1.96 * se[0]
 
-## Expected results from `original.py`
+## Expected results
 # Quantile:  0.5 0.5 Estimate:  -0.3229033782770835  Standard Error:  0.344419675456656
 # 95% Confidence interval:  -0.9979659421721293 0.35215918561796233
 
@@ -28,4 +28,3 @@ ci_ub = betahat + 2.58 * se[0]
 
 print("Quantile: 0.5 0.5", "Estimate: ", betahat, " Standard Error: ", se[0])
 print("99% Confidence interval: ", ci_lb, ci_ub)
-
