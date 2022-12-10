@@ -32,7 +32,7 @@ quantregCF(option, degree, tau_first_stage, tau_second_stage, data)
 
 `tau_second_stage` is the value of tau for the second-stage quantile regression. (between 0 and 1)
 
-The dataset is specified in `data`, which is a list of length 2.
+`data` is a list of length two that contains information on the dataset.
 ```python
 data = [`dataframe`, `var_lst`]
 ```
@@ -40,7 +40,7 @@ Each element in `data` is defined as followed:
 
 `dataframe` is the dataset in the pandas DataFrame format. 
 
-The variable names are specified in `var_lst`, which is a list of length 4. The first two elements of `var_lst` are strings and the last two elements are lists of strings.
+`var_lst` is a list of length four that contains the name of variables of interest. The first two elements of `var_lst` are strings and the last two elements are lists of strings.
 ```python
 `var_lst` = [`dep_var`, `endog_var`, `exog_var_lst`, `iv_var_lst`]
 ```
