@@ -3,8 +3,12 @@ import pandas as pd
 
 def loaddata(data_type, data_source, variable_lst):
     if data_type == 0:
+        # load data from URL
         url = urlopen(data_source)
         df = pd.read_stata(url)
+    if data_type == 1:
+        # load data from filepath
+        df = pd.read_stata(data_source)
 
     dep_var_name = variable_lst[0]
     endog_var_name = variable_lst[1]
