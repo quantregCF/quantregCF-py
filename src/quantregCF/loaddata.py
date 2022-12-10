@@ -1,15 +1,8 @@
 from urllib.request import urlopen
 import pandas as pd
 
-def loaddata(data_type, data_source, variable_lst):
-    if data_type == 0:
-        # load data from URL
-        url = urlopen(data_source)
-        df = pd.read_stata(url)
-    if data_type == 1:
-        # load data from filepath
-        df = pd.read_stata(data_source)
-
+def loaddata(dataframe, variable_lst):
+    df = dataframe
     dep_var_name = variable_lst[0]
     endog_var_name = variable_lst[1]
     exog_var_list = variable_lst[2]

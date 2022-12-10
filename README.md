@@ -32,17 +32,13 @@ quantregCF(option, degree, tau_first_stage, tau_second_stage, data)
 
 `tau_second_stage` is the value of tau for the second-stage quantile regression. (between 0 and 1)
 
-The dataset is specified in `data`, which is a list of length 3.
+The dataset is specified in `data`, which is a list of length 2.
 ```python
-data = [`data_type`, `data_source`, `var_lst`]
+data = [`dataframe`, `var_lst`]
 ```
 Each element in `data` is defined as followed: 
 
-`data_type` = 0 if the dataset is in Stata `.dta` format and is to be downloaded from a URL link specified in `data_source`.
-
-`data_type` = 1 if the dataset is in Stata `.dta` format and is to be loaded locally from the filepath specified in `data_source`.
-
-`data_source` is the URL link/file path of the dataset.
+`dataframe` is the dataset in the pandas DataFrame format. 
 
 The variable names are specified in `var_lst`, which is a list of length 4. The first two elements of `var_lst` are strings and the last two elements are lists of strings.
 ```python
@@ -55,12 +51,15 @@ Each element in `var_lst` is defined as followed:
 `exog_var_lst` and `iv_var_lst` are the lists of names of exogenous included variables and instrumental variables. 
 
 ## Example
+
+The file `fishdata.py` illustrates how to use `quantregCF` on the well-known Graddy’s Fulton fish market data. To run the code, simply download `fishdata.py` from the `tests` folder and run ```python fishdata.py```. Below is a code snippet showing how to load the data and use `quantregCF`.
+
 ```python
-# load data
-data_type = 0 # download the dataset from a URL link
-data_source = "http://people.brandeis.edu/~kgraddy/datasets/fishdata.dta"
+# load data into DataFrame `df` from https://www.kathryngraddy.org/research#pubdata
+data_source = "https://uploads-ssl.webflow.com/629e460595fdd36617348189/62a0fd19b6742078eed59f47_fish.out.txt"
+df = pd.read_csv(data_source, sep="\t")
 var_lst = ['qty', 'price', ["day1", "day2", "day3", "day4"], ["stormy", "mixed"]]
-data_lst = [data_type, data_source, var_lst]
+data_lst = [df, var_lst]
 
 # regressions using B-splines in the second-stage
 beta, se = quantregCF(option=1, degree=3, tau_first_stage=0.5, tau_second_stage=0.5, data=data_lst)
@@ -70,7 +69,6 @@ ci_lb = beta[0] - 1.96 * se[0]
 ci_ub = beta[0] + 1.96 * se[0]
 ```
 
-The file `fishdata.py` illustrates how to use `QuantregCF` on the well-known Graddy’s Fulton fish market data. To run the code, simply download `fishdata.py` from the `tests` folder and run ```python fishdata.py```.
 
 ## Dependencies
 - NumPy
