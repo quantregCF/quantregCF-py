@@ -55,10 +55,10 @@ Each element in `var_lst` is defined as followed:
 The file `fishdata.py` illustrates how to use `quantregCF` on the well-known Graddy’s Fulton fish market data. To run the code, simply download `fishdata.py` from the `tests` folder and run ```python fishdata.py```. Below is a code snippet showing how to load the data and use `quantregCF`.
 
 ```python
-# load data into DataFrame `df` from https://www.kathryngraddy.org/research#pubdata
+# load data into DataFrame from https://www.kathryngraddy.org/research#pubdata
 data_source = "https://uploads-ssl.webflow.com/629e460595fdd36617348189/62a0fd19b6742078eed59f47_fish.out.txt"
 df = pd.read_csv(data_source, sep="\t")
-var_lst = ['qty', 'price', ["day1", "day2", "day3", "day4"], ["stormy", "mixed"]]
+var_lst = ["qty", "price", ["day1", "day2", "day3", "day4"], ["stormy", "mixed"]]
 data_lst = [df, var_lst]
 
 # regressions using B-splines in the second-stage

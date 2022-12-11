@@ -3,3 +3,4 @@
 build/
 quantregCF.egg-info/
 src/quantregCF.egg-info/
+dist/
